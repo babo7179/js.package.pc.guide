@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+    <title>UI Script Guide ( jQuery-Based )</title>
+    <link rel="stylesheet" type="text/css" href="./styles/default.css" media="all" />
+    
+    <!-- syntaxhighlighter -->
+    <link type="text/css" rel="stylesheet" href="./syntaxhighlighter/styles/shCoreDefault.css"/>
+    <script type="text/javascript" src="./syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushXml.js"></script>
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	
+    <!--[if lt IE 9]>
+        <script src="./scripts/lib/html5.js"></script>
+    <![endif]-->
+    <!-- jquery -->
+    <script src="./scripts/jquery/jquery-1.10.2.min.js"></script>
+    
+    <!-- jquery : plugin -->
+    <script src="./scripts/jquery/plugin/jquery.admin.ppg.js"></script>
+    
+	<!-- jquery : utils, init -->
+	<script src="./scripts/jquery/jquery.utils.js"></script>
+	<script src="./scripts/jquery/jquery.init.admin.js"></script>
+</head>
+<body>
+
+<div id="document">
+	<div id="header">
+
+		<h1><a id="header_logo">UI Script Guide ( jQuery-Based )</a></h1>
+		<nav id="nav">
+		</nav>
+	</div>
+
+	<div id="contents">
+		<div class="content-wrap">
+			<aside>
+				<nav id="lnb"></nav>
+			</aside>
+			<div class="content-area">
+				<div class="sub-content">
+					
+					<h2>Sample</h2>
+					<div class="desc">
+						<ul>
+							<li><a href="./sample/parallex_absolute.html" target="_blank">Parallex Scroll</a> : version 1.</li>
+							<li><a href="./sample/parallex_relative.html" target="_blank">Parallex Scroll</a> : version 2.</li>
+							<li><a href="./sample/validate.html" target="_blank">Validate</a></li>
+							<li><a href="./sample/layer.html" target="_blank">Layer</a></li>
+							<li><a href="./sample/less.html" target="_blank">less</a></li>
+						</ul>
+					</div>
+					
+					<!-- <article>
+						<h3>1. js 파일 등록</h3>
+						<div class="desc">
+							아래의 내용을 <b>&lt;/head&gt;</b> Tag 바로 위에 작성한다.
+						</div>
+						<div class="code">
+							<pre class="brush: xml;">
+							</pre>
+						</div>
+					</article> -->
+					
+				</div>
+				<div class="fixed" style="right:30px;bottom:50px;z-index: 100;">
+					<button class="btn-type-1" id="top">Top</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="footer">
+		<h1><img src="" alt="Logo" /></h1>
+		<address class="copy"><p>(c) MZ Dev. All rights reserved.</p></address>
+	</footer>
+</div>
+
+<script>
+(function( $, window, document){
+	$(function(){
+		
+		//======================== page initialize =================
+		//============================================================
+		$.log('page init');
+		
+		SyntaxHighlighter.all();
+		//============================================================
+	});
+})( jQuery, window, document );
+</script>
+</body>
+</html>
