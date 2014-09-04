@@ -1,5 +1,5 @@
 js_package
-==========
+-------------------------------------------------------------------------------------
 
 javascript package (jquery-based)
 
@@ -17,3 +17,14 @@ Tienes que ser responsable del uso que es.
 
 これはテストです。 
 あなたはそれが使用するための責任を負う必要があります。
+
+
+-------------------------------------------------------------------------------------
+
+확장 영역 분리
+initialize Tamplate Pattern
+Plugin - 
+-- Custom input
+-- Custom Select
+-- Validate Text 분리
+-- Add, Minus : inner Dom Clone
