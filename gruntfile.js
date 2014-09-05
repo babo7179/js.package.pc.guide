@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 			},
 			admin_plugin_package : {
 				files : {
-					'scripts/jquery/plugin/jquery.admin.ppg.js' : [
+					'scripts/jquery/plugin/jquery.plugin.pkg.js' : [
 						'scripts/jquery/plugin/jquery.navigate.js',
 						'scripts/jquery/plugin/jquery.dotdotdot.js',
 						'scripts/jquery/plugin/jquery.form.js',
