@@ -6,12 +6,20 @@
 	'use strict';
 	
 	
-	jrx.define('g', function(){
-		
+	jrx.define('g', function(fn){
+		$(function(){
+			if($.type(fn) === 'function'){
+				fn();
+			}
+		});
 	});
 	
-	jrx.define('p', function(){
-		
+	jrx.define('p', function(fn){
+		$(function(){
+			if($.type(fn) === 'function'){
+				fn();
+			}
+		});
 	});
 	
 	/*

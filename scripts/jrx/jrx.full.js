@@ -665,12 +665,20 @@
 	'use strict';
 	
 	
-	jrx.define('g', function(){
-		
+	jrx.define('g', function(fn){
+		$(function(){
+			if($.type(fn) === 'function'){
+				fn();
+			}
+		});
 	});
 	
-	jrx.define('p', function(){
-		
+	jrx.define('p', function(fn){
+		$(function(){
+			if($.type(fn) === 'function'){
+				fn();
+			}
+		});
 	});
 	
 	/*
@@ -814,22 +822,22 @@
  * @method : jquery.init
  */
 (function( $, window, document){
-	// $(function(){
 		
-		//======================== mix $.utils =======================
-		var utils = $ || {};
-		utils.jrx = jrx;
+	//======================== mix $.utils =======================
+	var utils = $ || {};
+	utils.jrx = jrx;
+	
+	$.each(jrx, function(v, i){
 		
-		$.each(jrx, function(v, i){
-			
-			if( utils[v] === undefined ){
-				utils[v] = jrx[v];
-			} else {
-				jrx.log('ooora');
-			}
-		});
-		//============================================================
-	$(function(){
+		if( utils[v] === undefined ){
+			utils[v] = jrx[v];
+		} else {
+			jrx.log('ooora');
+		}
+	});
+	//============================================================
+	
+	$(function(){			// document.ready
 		
 		//========================= variable =========================
 		var dateFormat = 'yy-mm-dd',
@@ -880,51 +888,7 @@
 		}
 		//============================================================
 		
-		//===================== global initialize ====================
-		$logo.on('click', function () {
-			location.href = '/';
-			return false;
-		});
 		
-		$contents.on('click', '#top', function(){
-			location.href = "#";
-			contentsScrollTop();
-			return false;
-		});
-		//============================================================
-		
-		
-		//========================== menu ============================
-		var url = '/temp/json/menu.json';
-		
-		$.ajax({
-            url : url,
-            dataType : 'json'
-        }).done(function (r) {
-            $gnb.navi({lnb : $lnb, page:$page, data : r.menu});
-        });
-        
-        $gnb.on('click', 'a', navigationHandler);
-        $lnb.on('click', 'a', navigationHandler);
-        
-        function navigationHandler () {
-        	
-        	var $this = $(this);
-        	
-        	if($this.hasClass('on')) return false;
-
-    		if($lnb.has($this).length){
-    			$this.parent().addClass('on').siblings().removeClass('on');
-    			contentsScrollTop();	
-    		}
-        }
-		//============================================================
-		
-		//======================== functions =========================
-		function contentsScrollTop() {
-			$contents.find('.content-area').scrollTop(0);
-		}
-		//============================================================
 		
 	
 		
