@@ -3,7 +3,23 @@
  * @method : jquery.init
  */
 (function( $, window, document){
+	// $(function(){
+		
+		//======================== mix $.utils =======================
+		var utils = $ || {};
+		utils.jrx = jrx;
+		
+		$.each(jrx, function(v, i){
+			
+			if( utils[v] === undefined ){
+				utils[v] = jrx[v];
+			} else {
+				jrx.log('ooora');
+			}
+		});
+		//============================================================
 	$(function(){
+		
 		//========================= variable =========================
 		var dateFormat = 'yy-mm-dd',
 			timeFormat = 'HH:mm',
@@ -99,6 +115,7 @@
 		}
 		//============================================================
 		
+	
 		
 	});
 })( jQuery, window, document );
