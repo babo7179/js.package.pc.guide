@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 			},
 			dist : {
 				src: [
-					// '<%= pkg.path.jrx %>/jrx.js', 
+					'<%= pkg.path.jrx %>/jrx.js', 
 					'<%= pkg.path.jrx %>/jrx.init.js'
 				],
 				dest: '<%= pkg.path.jrx %>/jrx.full.js'
