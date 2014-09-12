@@ -8,7 +8,7 @@
 	
 	jrx.define('g', function(fn){
 		$(function(){
-			if($.type(fn) === 'function'){
+			if($.isFunction(fn)){
 				fn();
 			}
 		});
@@ -16,10 +16,26 @@
 	
 	jrx.define('p', function(fn){
 		$(function(){
-			if($.type(fn) === 'function'){
+			if($.isFunction(fn)){
 				fn();
 			}
 		});
+	});
+	
+	jrx.define('isString', function(obj){
+		return $.type(obj) === 'string';
+	});
+	
+	jrx.define('isNumber', function(obj){
+		return $.type(obj) === 'number';
+	});
+	
+	jrx.define('isBoolean', function(obj){
+		return $.type(obj) === 'boolean';
+	});
+	
+	jrx.define('isObject', function(obj){
+		return $.type(obj) === 'object';
 	});
 	
 	/*
