@@ -154,8 +154,6 @@
 			return self;
 		};
 		
-		
-			
 		/**
 		 * @method : regexp
 		 */
