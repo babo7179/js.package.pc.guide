@@ -24,7 +24,7 @@
 		
 		
 		//========================== menu ============================
-		var url = '/temp/json/menu.json';
+		var url = $.config('root') + 'temp/json/menu.json';
 		
 		$.ajax({
 	        url : url,

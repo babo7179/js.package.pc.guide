@@ -145,8 +145,6 @@
 			return self;
 		};
 		
-		
-			
 		/**
 		 * @method : regexp
 		 */
@@ -763,7 +761,6 @@ if (typeof Array.prototype.contains != 'function') {
 	//======================== Language ==========================
 	
 	//============================================================
-
 	
 	$(function(){			// document.ready
 		
