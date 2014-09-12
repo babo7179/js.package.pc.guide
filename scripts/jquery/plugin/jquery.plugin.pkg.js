@@ -1,4 +1,4 @@
-/*! 1.0_jquery - v0.0.0 - 2014-09-12 */;
+/*! scripts package - v1.0.0 - 2014-09-12 */;
 /**
  * @name : jquery.fn.navi
  */
@@ -83,16 +83,11 @@
 	   			url = url[url.length - 1];
 	   			url = pageInfo[url.replace('.html', '')];
 	   			
-	   		} else {
-	   			
 	   		}
 	   		
 	   		if(url){
 	   			url = url + '.html';
 	   		}
-	   		
-	   		
-	   		$.log(url);
 	   		
 	        return url;
 	   	}
@@ -149,7 +144,7 @@
 
 })( jQuery, window, document );;;
 /*	
- *	jQuery stateAlarm 0.0.1
+ *	jQuery stateAlarm 1.0.0
  *	
  *	Copyright (c) 2014 MZ jeros
  *

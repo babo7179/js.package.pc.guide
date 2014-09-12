@@ -1,6 +1,6 @@
 ;
 /*	
- *	jQuery stateAlarm 0.0.1
+ *	jQuery stateAlarm 1.0.0
  *	
  *	Copyright (c) 2014 MZ jeros
  *

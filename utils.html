@@ -67,12 +67,11 @@
 						<h3>$.config</h3>
 						<div class="desc">
 							설정된 application configuration 정보 get/set.
+							<br><br>
+							configuration 정보중 editable:true 인 값들만 runtime 에서 1회 설정이 가능하다.<br>
+							설정된  정보를 get : readonly.
 						</div>
 						<div class="code">
-							<div class="desc">
-								configuration 정보중 editable:true 인 값들만 runtime 에서 1회 설정이 가능하다.
-								설정된  정보를 get : readonly.
-							</div>
 							<pre class="brush: js;">
 								var _info = {
 										'useLog' : true

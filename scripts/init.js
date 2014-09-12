@@ -57,3 +57,9 @@
 		
 	});
 })( jQuery, window, document );
+
+(function( $, window, document){
+	$.ready(function(){
+		$.log('ready?');
+	});
+})( jQuery, window, document );
