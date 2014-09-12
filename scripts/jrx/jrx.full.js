@@ -23,6 +23,7 @@
 		        'isLogin': 		{ 'editable': true, 	'value': false },
 		        'root': 		{ 'editable': true, 	'value': '/' },
 		        'staticPath': 	{ 'editable': true, 	'value': '/' },
+		        'contextPath': 	{ 'editable': true, 	'value': '/' },
 		        'loginUrl':  	{ 'editable': true, 	'value': ''},
 		        'logoutUrl':  	{ 'editable': true, 	'value': ''}
 		    },

@@ -48,6 +48,7 @@
 			getPage(getUrl());
 			
 			if(child){
+				
 				renderer(config.lnb, child);
 				showlnb();
 				// if(config.lnb.find('a'))
@@ -76,10 +77,11 @@
 	   	
 	   	
 	   	function getUrl () {
+
 	   		var url = location.hash.replace( /^#\//, '' );
 	   		
 	   		if(!url){
-	   			url = location.pathname.split('/');
+	   			url = location.pathname.replace($.config('contextPath'), '').split('/');
 	   			url = url[url.length - 1];
 	   			url = pageInfo[url.replace('.html', '')];
 	   			
@@ -95,8 +97,9 @@
 	   	function getPage(url) {
 	   		
 	   		if(!url) return;
+	   			   		
 			$.ajax({
-	            url : url
+	            url : $.config('contextPath') + url
 	        }).done(function (r) {
 	            config.page.html(r);
 	            SyntaxHighlighter.highlight();
@@ -104,7 +107,8 @@
 	   	}
 	   	
 		function setCurrent() {
-			var path = location.pathname, child;
+			var path = location.pathname.replace($.config('contextPath'), ''), 
+				child;
 			
 			if(path === '/') return null;
 			

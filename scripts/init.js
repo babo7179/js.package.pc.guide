@@ -24,7 +24,7 @@
 		
 		
 		//========================== menu ============================
-		var url = $.config('root') + 'temp/json/menu.json';
+		var url = $.config('contextPath') + 'temp/json/menu.json';
 		
 		$.ajax({
 	        url : url,
