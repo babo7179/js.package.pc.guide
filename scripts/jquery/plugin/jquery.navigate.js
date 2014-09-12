@@ -45,9 +45,10 @@
 			
 			renderer(_this, config.data);
 			
+			getPage(getUrl());
+			
 			if(child){
 				renderer(config.lnb, child);
-				getPage(getUrl());
 				showlnb();
 				// if(config.lnb.find('a'))
 				
@@ -81,9 +82,14 @@
 	   			url = location.pathname.split('/');
 	   			url = url[url.length - 1];
 	   			url = pageInfo[url.replace('.html', '')];
+	   			
 	   		}
 	   		
-	        return url + '.html';
+	   		if(url){
+	   			url = url + '.html';
+	   		}
+	   		
+	        return url;
 	   	}
 	   	
 	   	function getPage(url) {
@@ -129,8 +135,6 @@
 				width: size
 			}, 1000, cb);
 		}
-		
-		
 		
 		init();
 		

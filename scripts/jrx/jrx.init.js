@@ -13,7 +13,7 @@
 		if( utils[v] === undefined ){
 			utils[v] = jrx[v];
 		} else {
-			jrx.log('ooora');
+			jrx.log('ooora!');
 		}
 	});
 	//============================================================

@@ -2,7 +2,7 @@
     "menu" : [
         {"name" : "Project Guide", "link" : "./guide.html", "target": ""},
         
-        {"name" : "Use/Performance", "link" : "./jquery.html", "target": "", "child" : [
+        {"name" : "jQuery Use/Performance", "link" : "./jquery.html", "target": "", "child" : [
             {"name" : "Selector", "link" : "#/page/jquery.selector", "target": "", "child" : [
                 {"name" : "Select 횟수 줄이기", "link" : "#/page/jquery.selector/count", "target": ""},
                 {"name" : "find 사용", "link" : "#/page/jquery.selector/find", "target": ""},

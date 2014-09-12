@@ -11,7 +11,8 @@ module.exports = function(grunt) {
 			},
 			jquery_plugins: {
 				src: [
-					'<%= pkg.path.plugin %>/jquery.navigate.js', 
+					'<%= pkg.path.plugin %>/jquery.navigate.js',
+					'<%= pkg.path.plugin %>/jquery.stateAlarm.js',
 					'<%= pkg.path.plugin %>/jquery.dotdotdot.js', 
 					'<%= pkg.path.plugin %>/jquery.form.js', 
 					'<%= pkg.path.plugin %>/jquery.validate.js'
@@ -50,6 +51,18 @@ module.exports = function(grunt) {
 			layer: {
 				src: '<%= pkg.path.plugin %>/jquery.layer.js',
 				dest: '<%= pkg.path.plugin %>/jquery.layer.min.js'
+			},
+			checkbox: {
+				src: '<%= pkg.path.plugin %>/jquery.checkbox.js',
+				dest: '<%= pkg.path.plugin %>/jquery.checkbox.min.js'
+			},
+			select: {
+				src: '<%= pkg.path.plugin %>/jquery.select.js',
+				dest: '<%= pkg.path.plugin %>/jquery.select.min.js'
+			},
+			stateAlarm: {
+				src: '<%= pkg.path.plugin %>/jquery.stateAlarm.js',
+				dest: '<%= pkg.path.plugin %>/jquery.stateAlarm.min.js'
 			},
 			jquery_plugins : {
 				files : {

@@ -71,24 +71,20 @@
 						</div>
 						<div class="code">
 							<pre class="brush: xml;">
-								&lt;!-- jquery (default) -->
-							    &lt;script src="./scripts/jquery/jquery-1.10.2.min.js">&lt;/script>
-							    
-							    &lt;!-- jquery : plugin (options) -->
-							    &lt;script src="./scripts/jquery/plugin/jquery.validate.js">&lt;/script>
-							    
-								&lt;!-- jquery : utils, init (default) -->
-								&lt;script src="./scripts/jquery/jquery.utils.js">&lt;/script>
-								&lt;script src="./scripts/jquery/jquery.init.js">&lt;/script>
+								&lt;script src="./scripts/jquery/jquery-1.10.2.min.js">&lt;/script>				<!-- jquery -->
+							    &lt;script src="./scripts/jquery/plugin/jquery.plugin.pkg.js">&lt;/script>		<!-- jquery : plugin package -->
+								&lt;script src="./scripts/jrx/jrx.full.min.js">&lt;/script>						<!-- jrx -->
+								
+								&lt;script src="./scripts/init.js">&lt;/script>									<!-- initialize -->
 							</pre>
 							
 						</div>
 					</article>
 					
 					<article>
-						<h3>2. Global Initialize</h3>
+						<h3>2. Initialize</h3>
 						<div class="desc">
-							동일하게 적용되어야하는 script는 <b>scripts/jquery/jquery.init.js</b> 파일에 작성한다.<br>
+							동일하게 적용되어야하는 script는 <b>scripts/init.js</b> 파일에 작성한다.<br>
 							application configuration, ajax 설정 정보 등을 여기서 작성한다.
 						</div>
 						<div class="code">
@@ -124,7 +120,7 @@
 					</article>
 					
 					<article>
-						<h3>3. Page Initialize</h3>
+						<h3>3. JavaScript Code Block (Page)</h3>
 						<div class="desc">
 							page 에 작성되어야 하는 script 는 <b>&lt;/body&gt;</b> Tag 바로 위에 작성한다.
 						</div>
@@ -166,12 +162,16 @@
 									jquery/ 
 										jquery-1.10.2.min.js
 										jquery-1.10.2.min.map
-										jquery.init.js
-										jquery.utils.js
 										plugin/
-											jquery.layer.js
+											jquery.dotdotdot.js
 											jquery.validate.js
 											...
+									jrx/
+										jrx.extend.js
+										jrx.full.js
+										jrx.full.min.js
+										jrx.init.js
+										jrx.js
 									lib/
 										html5.js
 										modernizr.full.min.js
@@ -185,6 +185,9 @@
 					
 					<article>
 						<h3>5. Rule</h3>
+						<div class="desc">
+							Camel Case, Pascal Case.
+						</div>
 						<div class="code">
 							<h4>5-1. Naming Rule</h4>
 							<pre class="brush: js;">
@@ -240,7 +243,7 @@
 
 					</article>
 					
-					<article>
+					<!-- <article>
 						<h3>6. JavaScript Specificity</h3>
 						<div class="code">
 							<h4>6-1. Hoisting</h4>
@@ -258,7 +261,7 @@
 							</pre>
 						</div>
 
-					</article>
+					</article> -->
 				</div>
 				<div class="fixed" style="right:30px;bottom:50px;z-index: 100;">
 					<button class="btn-type-1" id="top">Top</button>

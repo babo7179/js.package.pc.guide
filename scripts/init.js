@@ -1,6 +1,6 @@
 (function( $, window, document){
-	$(function(){			// document.ready
-		
+	$(function(){
+				
 		var $logo = $('#header_logo'),
 			$gnb = $('#nav'),
 			$lnb = $('#lnb'),
@@ -56,4 +56,4 @@
 		//============================================================
 		
 	});
-});
+})( jQuery, window, document );

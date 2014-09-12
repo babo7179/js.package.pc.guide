@@ -41,7 +41,7 @@
 			<div class="content-area">
 				<div class="sub-content">
 					
-					<h2>jQuery Utils</h2>
+					<h2>jQuery Extend Utils</h2>
 					<div class="desc">
 						jQuery namespace 를 확장한 utils.<br><br>
 						
@@ -53,18 +53,15 @@
 						$.stringify<br>
 						$.regexp<br>
 						$.strip<br>
-						$.toHexFromRGB<br>
-						$.toRGBFromHex<br>
-						$.toRGBFromRGBA<br>
+						<!-- $.toHexFromRGB<br> -->
+						<!-- $.toRGBFromHex<br> -->
+						<!-- $.toRGBFromRGBA<br> -->
 						$.stateAlarm<br><br>
-						
 						$.validate.init<br>
-						$.validate.extend<br><br>
+						<!-- $.validate.extend<br><br> -->
 						
 						$.browser
 					</div>
-					<pre class="brush: xml;">
-						&lt;script src="./scripts/jquery/jquery.utils.js">&lt;/script></pre>
 					
 					<article>
 						<h3>$.config</h3>
@@ -72,21 +69,20 @@
 							설정된 application configuration 정보 get/set.
 						</div>
 						<div class="code">
-							<h4 class="small">$.config > set</h4>
 							<div class="desc">
 								configuration 정보중 editable:true 인 값들만 runtime 에서 1회 설정이 가능하다.
+								설정된  정보를 get : readonly.
 							</div>
 							<pre class="brush: js;">
 								var _info = {
 										'useLog' : true
 									};
+								
+								// $.config > set
 								$.config(_info);
 							</pre>
-							<h4 class="small">$.config > get</h4>
-							<div class="desc">
-								설정된  정보를 get : readonly.
-							</div>
 							<pre class="brush: js;">
+								// $.config > get
 								var root = $.config('root');</pre>
 							
 						</div>
@@ -195,11 +191,13 @@
 								
 								data = JSON.stringify(data);
 								$.log($.type(data));					// string
+								
 								data = JSON.parse(data);
 								$.log($.type(data));					// object
 								
 								data = $.stringify(data);
 								$.log($.type(data));					// string
+								
 								data = $.parseJSON(data);
 								$.log($.type(data));					// object
 							</pre>
@@ -228,12 +226,12 @@
 							<pre class="brush: js;">
 								var domText = '&lt;strong>Hello!&lt;/strong>';
 								
-								$.log($.strip(domText));
+								$.log($.strip(domText));		// Hello!
 							</pre>
 						</div>
 					</article>
 					
-					<article>
+					<!-- <article>
 						<h3>$.toHexFromRGB</h3>
 						<div class="desc">
 							...
@@ -243,9 +241,9 @@
 								//...
 							</pre>
 						</div>
-					</article>
+					</article> -->
 					
-					<article>
+					<!-- <article>
 						<h3>$.toRGBFromHex</h3>
 						<div class="desc">
 							...
@@ -255,9 +253,9 @@
 								//...
 							</pre>
 						</div>
-					</article>
+					</article> -->
 					
-					<article>
+					<!-- <article>
 						<h3>$.toRGBFromRGBA</h3>
 						<div class="desc">
 							...
@@ -267,7 +265,7 @@
 								//...
 							</pre>
 						</div>
-					</article>
+					</article> -->
 					
 					<article>
 						<h3>$.stateAlarm</h3>
@@ -296,7 +294,7 @@
 						</div>
 					</article>
 					
-					<article>
+					<!-- <article>
 						<h3>$.validate.extend</h3>
 						<div class="desc">
 							validate plugin extend : message 등록, engnum/length/count Method 등록.
@@ -306,7 +304,7 @@
 								$.validate.extend();
 							</pre>
 						</div>
-					</article>
+					</article> -->
 					
 				</div>
 				<div class="fixed" style="right:30px;bottom:50px;z-index: 100;">
