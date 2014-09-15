@@ -27,9 +27,7 @@
             	var html = '';
             	
             	$.each(data, function(i, v){
-            		
-            		$.log(v);
-            		
+            		            		
 	                html += '<li' + (v.cls !== undefined ? ' class="' + v.cls + '"' : '') + '><a ' + (v.link !== undefined ? 'href="' + v.link + '"' : '') + '>' + v.name + '</a>';
 	                if(deep == true && v.child && v.child.length){
 	                	html += '<ul>' + getList(v.child) + '</ul>';
