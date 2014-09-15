@@ -21,7 +21,8 @@
   "path": {
     "script": "scripts",
     "plugin": "scripts/jquery/plugin",
-    "jrx": "scripts/jrx"
+    "jrx": "scripts/jrx",
+    "dist": "scripts/dist"
   },
   "author": "",
   "license": "ISC"

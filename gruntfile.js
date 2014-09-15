@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 					'<%= pkg.path.plugin %>/jquery.form.js', 
 					'<%= pkg.path.plugin %>/jquery.validate.js'
 				],
-				dest: '<%= pkg.path.plugin %>/jquery.plugin.pkg.js'
+				dest: '<%= pkg.path.dist %>/jquery.plugin.pkg.js'
 			},
 			dist : {
 				src: [
@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 					'<%= pkg.path.jrx %>/jrx.extend.js',
 					'<%= pkg.path.jrx %>/jrx.init.js'
 				],
-				dest: '<%= pkg.path.jrx %>/jrx.full.js'
+				dest: '<%= pkg.path.dist %>/jrx.full.js'
 			}
 		},
 		uglify: {
@@ -36,11 +36,11 @@ module.exports = function(grunt) {
 			jrx: {
 				options:{
 					sourceMap : true,
-					sourceMapName:'<%= pkg.path.jrx %>/jrx.full.min.map'
+					sourceMapName:'<%= pkg.path.dist %>/jrx.full.min.map'
 				},
 				files : {
-					'<%= pkg.path.jrx %>/jrx.full.min.js' : [
-						'<%= pkg.path.jrx %>/jrx.full.js'
+					'<%= pkg.path.dist %>/jrx.full.min.js' : [
+						'<%= pkg.path.dist %>/jrx.full.js'
 					]
 				}
 			},
@@ -66,8 +66,8 @@ module.exports = function(grunt) {
 			},
 			jquery_plugins : {
 				files : {
-					'<%= pkg.path.plugin %>/jquery.plugin.pkg.min.js' : [
-						'<%= pkg.path.plugin %>/jquery.plugin.pkg.js'
+					'<%= pkg.path.dist %>/jquery.plugin.pkg.min.js' : [
+						'<%= pkg.path.dist %>/jquery.plugin.pkg.js'
 					]
 				}
 			}

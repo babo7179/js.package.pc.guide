@@ -1,4 +1,4 @@
-/*! scripts package - v1.0.0 - 2014-09-12 */;
+/*! scripts package - v1.0.0 - 2014-09-15 */;
 /**
  * @name : jquery.fn.navi
  */
@@ -45,13 +45,10 @@
 			
 			renderer(_this, config.data);
 			
-			$.log(getUrl());
-			
 			getPage(getUrl());
 			
 			if(child){
 				
-				$.log('123123123');
 				renderer(config.lnb, child);
 				showlnb();
 				// if(config.lnb.find('a'))
@@ -100,9 +97,7 @@
 	   	function getPage(url) {
 	   		
 	   		if(!url) return;
-	   		
-	   		$.log($.config('contextPath') + url);
-	   		
+	   			   		
 			$.ajax({
 	            url : $.config('contextPath') + url
 	        }).done(function (r) {
