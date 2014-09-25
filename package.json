@@ -19,7 +19,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "path": {
-    "script": "scripts",
+    "scripts": "scripts",
+    "jquery": "scripts/jquery",
     "plugin": "scripts/jquery/plugin",
     "jrx": "scripts/jrx",
     "dist": "scripts/dist"

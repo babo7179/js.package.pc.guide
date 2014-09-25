@@ -1,0 +1,12 @@
+{
+  "name": "tru",
+  "version": "0.0.0",
+  "authors": [
+    "jeros@mz.co.kr"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "jquery": "~1.11.1",
+    "js.package.pc": "git://github.com/jeros-mz/js.package.pc"
+  }
+}

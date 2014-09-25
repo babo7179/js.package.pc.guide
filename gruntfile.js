@@ -17,15 +17,15 @@ module.exports = function(grunt) {
 					'<%= pkg.path.plugin %>/jquery.form.js', 
 					'<%= pkg.path.plugin %>/jquery.validate.js'
 				],
-				dest: '<%= pkg.path.dist %>/jquery.plugin.pkg.js'
+				dest: '<%= pkg.path.jquery %>/jquery.plugin.pkg.js'
 			},
 			dist : {
 				src: [
-					'<%= pkg.path.jrx %>/jrx.js',
+					'<%= pkg.path.jrx %>/jrx.base.js',
 					'<%= pkg.path.jrx %>/jrx.extend.js',
 					'<%= pkg.path.jrx %>/jrx.init.js'
 				],
-				dest: '<%= pkg.path.dist %>/jrx.full.js'
+				dest: '<%= pkg.path.jrx %>/jrx.js'
 			}
 		},
 		uglify: {
@@ -36,11 +36,11 @@ module.exports = function(grunt) {
 			jrx: {
 				options:{
 					sourceMap : true,
-					sourceMapName:'<%= pkg.path.dist %>/jrx.full.min.map'
+					sourceMapName:'<%= pkg.path.jrx %>/jrx.min.map'
 				},
 				files : {
-					'<%= pkg.path.dist %>/jrx.full.min.js' : [
-						'<%= pkg.path.dist %>/jrx.full.js'
+					'<%= pkg.path.jrx %>/jrx.min.js' : [
+						'<%= pkg.path.jrx %>/jrx.js'
 					]
 				}
 			},
@@ -65,9 +65,13 @@ module.exports = function(grunt) {
 				dest: '<%= pkg.path.plugin %>/jquery.stateAlarm.min.js'
 			},
 			jquery_plugins : {
+				options:{
+					sourceMap : true,
+					sourceMapName:'<%= pkg.path.jquery %>/jquery.plugin.pkg.min.map'
+				},
 				files : {
-					'<%= pkg.path.dist %>/jquery.plugin.pkg.min.js' : [
-						'<%= pkg.path.dist %>/jquery.plugin.pkg.js'
+					'<%= pkg.path.jquery %>/jquery.plugin.pkg.min.js' : [
+						'<%= pkg.path.jquery %>/jquery.plugin.pkg.js'
 					]
 				}
 			}
