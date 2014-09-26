@@ -1,4 +1,4 @@
-/*! scripts package - v1.0.0 - 2014-09-25 */;
+/*! scripts package - v1.0.0 - 2014-09-26 */;
 /**
  * @name : jquery.fn.navi
  */

@@ -1,4 +1,4 @@
-/*! scripts package - v1.0.0 - 2014-09-25 */(function(document, window){
+/*! scripts package - v1.0.0 - 2014-09-26 */(function(document, window){
 	'use strict';
 	
 	/**
