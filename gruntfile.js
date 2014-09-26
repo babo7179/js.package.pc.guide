@@ -52,9 +52,9 @@ module.exports = function(grunt) {
 				src: '<%= pkg.path.plugin %>/jquery.layer.js',
 				dest: '<%= pkg.path.plugin %>/jquery.layer.min.js'
 			},
-			checkbox: {
-				src: '<%= pkg.path.plugin %>/jquery.checkbox.js',
-				dest: '<%= pkg.path.plugin %>/jquery.checkbox.min.js'
+			checkboxGroup: {
+				src: '<%= pkg.path.plugin %>/jquery.checkboxGroup.js',
+				dest: '<%= pkg.path.plugin %>/jquery.checkboxGroup.min.js'
 			},
 			select: {
 				src: '<%= pkg.path.plugin %>/jquery.select.js',
