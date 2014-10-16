@@ -17,8 +17,8 @@
 		var defaults = {
 				target : ''
 			},                                  			// default config info.
-        	config = $.extend(true, defaults, options);     // extend default config form options.
-			
+        	config = $.extend(true, defaults, options),     // extend default config form options.
+			clsName = 'active';
 		
 		return this.each(function (i, v) {
     		
@@ -32,7 +32,7 @@
     			var val = $score.data('score') || 0;
     			
     			if(val == 0) {
-    				$score.find('button').removeClass('on');
+    				$score.find('button').removeClass(clsName);
     			} else {
     				$score.find('button').each(function (i, v) {
         				var $btn = $(this);
@@ -59,8 +59,8 @@
     		}
     		
     		function btnActive ($b) {
-    			$b.addClass('on').nextAll().addClass('on');
-				$b.prevAll().removeClass('on');
+    			$b.addClass(clsName).nextAll().addClass(clsName);
+				$b.prevAll().removeClass(clsName);
     		}
     		
     		function setValue (val) {

@@ -17,62 +17,52 @@
 		
 		var defaults = {
 				number : 1,
+				minus : '',
+				plus : '',
 				readonly : false
 			},
-            config = $.extend(true, defaults, options),     // extend default config form options.
-        	btnInfo = [
-    			{name : 'Plus', cls : 'ui-icon ui-icon-carat-1-n'},
-    			{name : 'Minus', cls : 'ui-icon ui-icon-carat-1-s'}
-    		];
-        
-        function getButtonSet () {
-        	
-        	var $btnSet = $('<div class="btn_set" style="float:left;"></div>');
-        	
-        	$.each(btnInfo, function (i, v){
-        		$btnSet.append('<button class="' + v.cls + '">' + v.name + '</button>');
-        	});
-        	
-        	return $btnSet;
-        }
+            config = $.extend(true, defaults, options)     // extend default config form options.
+        	;
         
         return this.each(function (i, v) {
         	
         	var $input = $(v), 
         		$wrap = $input.parent(),
-        		defaultNumber = $input.data('number') || config.number;
+        		val = $input.val() || config.number,
+        		$btnMinus = $input.prev(),
+        		$btnPlus = $input.next();
+        	        	
+        	val = parseInt(val, 10);
         	
-        	$wrap.append(getButtonSet()).on('click', 'button', adjustHandler);
-        	
-        	$input.val(defaultNumber);
+        	$btnMinus.on('click', minusHandler);
+        	$btnPlus.on('click', plusHandler);
         	
         	if(config.readonly){
         		
         		$input.attr('readonly', true);
-        		
         	} else {
         		
         		$input.on('keyup keydown', function(e){
-        			
-        			if(!$.isNumberKey(e)){
-        				return false;
-        			}
+        			if(!$.isNumberKey(e)) return false;
         		});
         	}
         	
-        	function adjustHandler (e) {
+        	function plusHandler (e) {
         		
-        		var $btn = $(this),
-        			val = parseInt($input.val(), 10);
+        		var val = parseInt($input.val(), 10) + 1;
         		
-        		if($btn.hasClass(btnInfo[0].cls)){
-        			$input.val(val + 1);
-        		} else {
-        			if(val > config.number) {
-        				$input.val(val - 1);
-        			}
-        		}
-     	   	}
+        		$input.val(val);
+        	}
+        	
+        	function minusHandler (e) {
+        		
+        		var val = parseInt($input.val(), 10);
+        		
+        		if(val > config.number) {
+        			var val = parseInt(val - 1);
+    				$input.val(val);
+    			}
+        	}
         });
 	};
 	

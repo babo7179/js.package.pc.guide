@@ -11,146 +11,88 @@
 (function( $, window, document){
 	
 	/** 
-	 * @name : starScore
+	 * @name : openWindow
 	 */
-	$.fn.starScore = function( options ) {
+	$.openWindow = function (options) {
 		var defaults = {
-				target : ''
-			},                                  			// default config info.
-        	config = $.extend(true, defaults, options),     // extend default config form options.
-			clsName = 'active';
+				url : '',
+				name : '',
+				option : {
+					width : 600,
+					height : 400,
+					toolbar : 'no',
+					menubar : 'no',
+					location : 'no',
+					scrollbars : 'no',
+					status : 'no'
+				}
+			},                                  // default config info.
+        	config = $.extend(true, defaults, options);     // extend default config form options.
+        	
+		var winOptions = $.param(config.option);
+		
+		if(!config.url) return;
+		
+		window.open(config.url, config.name, winOptions);
 		
 		return this.each(function (i, v) {
     		
-    		var $score = $(v),
-    			$input = $($score.data('target'));
-    		
-    		$score.find('button').on('click mouseover', eventHandler);
-    		
-    		$score.on('mouseleave', function() {
-    			
-    			var val = $score.data('score') || 0;
-    			
-    			if(val == 0) {
-    				$score.find('button').removeClass(clsName);
-    			} else {
-    				$score.find('button').each(function (i, v) {
-        				var $btn = $(this);
-        				
-        				if(val == $btn.val()){
-        					btnActive($btn);
-        					return;
-        				}
-        			});
-    			}
-    		});
-    		
-    		function eventHandler(e) {
-    			
-    			var $btn = $(this);
-    			
-    			btnActive($btn);
-    			
-    			if(e.type == 'click'){
-    				setValue($btn.val());
-    			}
-    			
-    			return false;
-    		}
-    		
-    		function btnActive ($b) {
-    			$b.addClass(clsName).nextAll().addClass(clsName);
-				$b.prevAll().removeClass(clsName);
-    		}
-    		
-    		function setValue (val) {
-    			$score.data('score', val);
-    			$input.val(val);
-    		}
     	});
 	};
 	
 	/** 
-	 * @name : itemListControl
-	 * @desc : 
-	 * mouseover, focusin : add active class
-	 * mouseout, focusout : remove active class
-	 * check box checked : add selected class
-	 * click cart : open cart layer
-	 * quantity minus/plus.
+	 * @name : openLayer
+	 * @depends : underscore
 	 */
-	$.fn.itemListControl = function( options ) {
+	$.openLayer = function (options) {
 		var defaults = {
-				item : '.item',
-				layer : '.layer-option',
-				clsActive : 'active',
-				clsSelected : 'selected',
-				duration : 150
-			},                                  			// default config info.
-        	config = $.extend(true, defaults, options),     // extend default config form options.
-			$list = this,
-			$items = this.find(config.item),
-			$layers = $items.find(config.layer);
-		
-		function closeAllCart () {
-			// $.log('closeAllCart');
-			$list.find(config.layer).hide();
-		}
-		
-		$items.on('click', ' a.cart', function (e) {
-    			    		
-    		var $btnCart = $(this),
-    			$item = $btnCart.closest(config.item);
-			
-			if($item.find('>.layer-option').css('display') == 'none') {
-				closeAllCart();
-			}
-			
-			$item.find('>.layer-option').fadeToggle(config.duration);
-			
-			return false;	    	
-		});
-		
-		$items.find('>.layer-option a.close').on('click', outHandler);
-		
-		function outHandler(e) {
-			
-			$(this).closest(config.item).find('>.layer-option').hide();
-			return false;
-		}
-		
-		$items.on('click', 'div.prd-select > input', function (e) {
-    			    		
-    		var $chk = $(this),
-    			$item = $chk.closest(config.item);
-    		
-    		if($chk.is(':checked')){
-    			$item.addClass(config.clsSelected);
-    		} else {
-    			$item.removeClass(config.clsSelected);
-    		}	
-		});
-		
-		$items.on('mouseover focusin', function (e) {
-			
-    		$(this).addClass(config.clsActive);
-    		return false;
-		});
-		
-		$items.on('mouseleave focusout', function (e) {
-			
-    		$(this).removeClass(config.clsActive);
-			
-			$(this).closest(config.item).find('>.layer-option').fadeOut(config.duration);
-			return false;
-		});
-		
-		// quantity minus/plus.
-		if($.isFunction($.fn.nAdjust)){
-			$items.find('input[name=goods_quantity]').nAdjust({
-				readonly:false
-			});
-		}
+				returnTarget : '',
+				target : document.body,
+				contents : function () {},
+				callback : function (){}
+			},
+        	config = $.extend(true, defaults, options),
+        	$target = $(config.target),
+        	isMask = $.mask !== undefined;
+        
+        if(isMask) $.mask.show();
+        
+        var $contents = $(config.contents());
+        $target.append($contents);
+        config.callback();
+        
+        // set close event handler.
+        $contents.find('button.btn_close').on('click', function(){
+        	if(isMask) $.mask.hide();
+        	$contents.remove();
+        	config.returnTarget.focus();
+        });
+        
+        //set focus
+        $contents.find('a, button').on('keyup keydown', focusHandler).first().focus();
+		var moveFirst = false;
+        function focusHandler(e) {
+            var keyCode = e.keyCode;
+                        
+            if (keyCode == 9) {
+                if (moveFirst) {
+                    $contents.find('a, button').first().focus();
+                    moveFirst = false;
+                    return false;
+                }
+                if ($(this)[0] == $contents.find('a, button').last()[0]) {
+                    moveFirst = true;
+                    return false;
+                }
+            }
+        }
+        
+        // TODO : 클로즈 발생시 포커스 돌려주기.
+        
+        
 	};
+	
+	
+	
 	
 })(jQuery, window, document);
