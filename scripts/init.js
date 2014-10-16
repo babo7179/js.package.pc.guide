@@ -1,6 +1,13 @@
 (function( $, window, document){
 	$(function(){
-				
+		
+		//================== application configuration ===============
+		var appconfig = {
+				"useLog" : true
+		};
+		$.config(appconfig);
+		//============================================================
+		
 		var $logo = $('#header_logo'),
 			$gnb = $('#nav'),
 			$lnb = $('#lnb'),
