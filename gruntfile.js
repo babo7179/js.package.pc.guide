@@ -18,31 +18,12 @@ module.exports = function(grunt) {
 					'<%= pkg.path.plugin %>/jquery.validate.js'
 				],
 				dest: '<%= pkg.path.jquery %>/jquery.plugin.pkg.js'
-			},
-			dist : {
-				src: [
-					'<%= pkg.path.jrx %>/jrx.base.js',
-					'<%= pkg.path.jrx %>/jrx.extend.js',
-					'<%= pkg.path.jrx %>/jrx.init.js'
-				],
-				dest: '<%= pkg.path.jrx %>/jrx.js'
 			}
 		},
 		uglify: {
 			options: {
 				banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
 				report: 'min'
-			},
-			jrx: {
-				options:{
-					sourceMap : true,
-					sourceMapName:'<%= pkg.path.jrx %>/jrx.min.map'
-				},
-				files : {
-					'<%= pkg.path.jrx %>/jrx.min.js' : [
-						'<%= pkg.path.jrx %>/jrx.js'
-					]
-				}
 			},
 			form: {
 				src: '<%= pkg.path.plugin %>/jquery.form.js',

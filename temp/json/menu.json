@@ -1,6 +1,11 @@
 {
     "menu" : [
-        {"name" : "Project Guide", "link" : "./guide.html", "target": ""},
+        {"name" : "Project Guide", "link" : "guide.html", "target": "", "child" : [
+            
+            {"name" : "Initialize", "link" : "#/page/guide.init", "target": ""},
+            {"name" : "Packaging", "link" : "#/page/guide.package", "target": ""},
+            {"name" : "Rule", "link" : "#/page/guide.rule", "target": ""}
+        ]},
         
         {"name" : "jQuery Use/Performance", "link" : "./jquery.html", "target": "", "child" : [
             {"name" : "Selector", "link" : "#/page/jquery.selector", "target": "", "child" : [

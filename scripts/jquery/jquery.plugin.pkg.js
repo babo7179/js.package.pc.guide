@@ -1,4 +1,4 @@
-/*! scripts package - v1.0.0 - 2014-09-26 */;
+/*! scripts.package - v1.0.0 - 2014-10-30 */;
 /**
  * @name : jquery.fn.navi
  */
@@ -12,6 +12,7 @@
 			defaults = {data : [], lnb: '', page : ''},
 			config = $.extend(defaults, options),
             pageInfo = {
+				'guide' : 'page/guide.init',
 				'jquery' : 'page/jquery.selector',
 				'plugin' : 'page/plugin.validate'
 			};
@@ -27,8 +28,8 @@
             	var html = '';
             	
             	$.each(data, function(i, v){
-            		            		
-	                html += '<li' + (v.cls !== undefined ? ' class="' + v.cls + '"' : '') + '><a ' + (v.link !== undefined ? 'href="' + v.link + '"' : '') + '>' + v.name + '</a>';
+            		
+	                html += '<li' + (v.cls !== undefined ? ' class="' + v.cls + '"' : '') + '><a ' + (v.link !== undefined ? 'href="' + getLink(v.link) + '"' : '') + '>' + v.name + '</a>';
 	                if(deep == true && v.child && v.child.length){
 	                	html += '<ul>' + getList(v.child) + '</ul>';
 	                }
@@ -36,6 +37,10 @@
 	            });
 	            
             	return html;
+            }
+            
+            function getLink(link){
+            	return link.indexOf('#') > -1 ? link : $.config('contextPath') + link;
             }
 		}
 		

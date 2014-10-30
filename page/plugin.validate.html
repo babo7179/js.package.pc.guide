@@ -143,12 +143,10 @@
 			&lt;form>
 			
 			&lt;script>
-				$frm.valid();??
-				$frm.validate({
-                    submitHandler: function (form) {
-                        form.submit();
-                    }
-                });
+				var isValid = $frm.valid();
+				if(isValid){
+					// success process.
+				}
           	&lt;/script>
 		</pre>
 	</div>

@@ -1,4 +1,4 @@
-/*! jrx - v0.1.0 - 2014-10-06 */(function(document, window){
+/*! jrx - v0.1.0 - 2014-10-30 */(function(document, window){
 	'use strict';
 	
 	/**
@@ -19,13 +19,15 @@
 		     * @depends: config [Object]
 		     */
 	    var _config = {
-		        'useLog': 		{ 'editable': true, 	'value': true },
+		        'useLog': 		{ 'editable': true, 	'value': false },
 		        'isLogin': 		{ 'editable': true, 	'value': false },
 		        'root': 		{ 'editable': true, 	'value': '/' },
 		        'staticPath': 	{ 'editable': true, 	'value': '/' },
 		        'contextPath': 	{ 'editable': true, 	'value': '/' },
 		        'loginUrl':  	{ 'editable': true, 	'value': ''},
-		        'logoutUrl':  	{ 'editable': true, 	'value': ''}
+		        'logoutUrl':  	{ 'editable': true, 	'value': ''},
+		        'loading' : 	{ 'editable': true, 	'value': './images/loading_medium.gif'},
+		        'maskColor' : 	{ 'editable': true, 	'value': '#aaaaaa'}
 		    },
 		    
 		    /**
@@ -101,7 +103,6 @@
 		 * @params : object
 		 * @method log
 		 * @param {} obj
-		 * @return ThisExpression
 		 */
 		this.log = function (obj) {
 			var useLog = this.config('useLog') == true && window.console;
@@ -112,7 +113,6 @@
 	                console.log && console.log(obj);
 	            }
 	        }
-	        return this;
 		};
 	    
 		/**
@@ -151,6 +151,30 @@
 		 */
 		this.regexp = function(s){
 			return _REG_EXP[s] || new RegExp();
+		};
+		
+		/**
+		 * @method : extend
+		 * @TODO : deep option 처리.
+		 */
+		this.extend = function () {
+			
+			var deep = false,
+				origin = {},
+				add = {};
+				
+			if($.isBoolean(arguments[0])){
+				deep = arguments[0];
+				origin = arguments[1];
+				add = arguments[2];
+			} else {
+				origin = arguments[0];
+				add = arguments[1];
+			}
+			
+			for(var o in origin) {
+				origin[o] = add[o] ? add[o] : origin[o];
+			}
 		};
 		
 		/**
@@ -264,6 +288,50 @@
 	        
 	        return rtnValue;
 	    };
+	    
+	    /*
+	     * @method : addCommas [Function]
+	     * @desc : 
+	     */
+	    this.addCommas = function (nStr) {
+	        
+	        nStr += '';
+			var x = nStr.split('.');
+			var x1 = x[0];
+			var x2 = x.length > 1 ? '.' + x[1] : '';
+			var rgx = /(\d+)(\d{3})/;
+			
+			while (rgx.test(x1)) {
+				x1 = x1.replace(rgx, '$1' + ',' + '$2');
+			}
+			return x1 + x2;
+	    };
+	    
+	    /*
+	     * @method : preloadImage [Function]
+	     * @desc : 
+	     */
+	    this.preloadImage = function () {
+	        
+	        if(arguments.length === 0 ) return;
+	        
+			var i = 0;
+	        			
+	        if(jrx.isArray(arguments[0])){
+	        	for (i = 0; i < arguments[0].length; i++) {
+					load(arguments[0][i]);
+				}
+	        } else {
+	        	for (i = 0; i < arguments.length; i++) {
+					load(arguments[i]);
+				}
+	        }
+	        function load(src) {
+	        	var img = new Image();
+				img.src = src;
+	        }
+	    };
+	    
 	    
 	    /*
 	     * @name : imageLoadResize [Function]
@@ -430,20 +498,41 @@
 	jrx.define('loading', new function(){
 		var id = 'loading',
 	    	cls = 'loading',
-	        isLoading = false, isTimeout = false, delay = 800;
+	        isLoading = false, isTimeout = false, delay = 800,
+	        css = {
+	    		'position' : 'fixed',
+	    		'top' : 0,
+	    		'left' : 0,
+	    		'width' : '100%',
+	    		'height' : '100%',
+	    		'background' : 'url(' + jrx.config('loading') + ') no-repeat 50% 50%',
+	    		'z-index' : 98
+	    	};
 	    
 	    /*
 		 * @method : show
 		 */
-	    this.show = function () {
+	    this.show = function (addStyle) {
 	        
 	        if(!isLoading){
 	            jrx.mask && jrx.mask.show();
 	            
-	            var msk = document.createElement('div');
+	            var msk = document.createElement('div'), style = '';
 	            msk.setAttribute('id', id);
 	            msk.setAttribute('class', id);
 	            
+	            css.background = 'url(' + jrx.config('loading') + ') no-repeat 50% 50%';
+	            
+	            if(addStyle){
+		        	css = $.extend(css, addStyle);
+		        }
+	            
+	            
+	            for(var v in css){
+		        	style += v + ':' + css[v] + ';';
+		        }
+		        msk.setAttribute('style', style);
+		        
 	            if (!document.getElementById(id)) document.body.appendChild(msk);
 	            isLoading= true;
 	            isTimeout = false;
@@ -484,16 +573,40 @@
 	 */
 	jrx.define('mask', new function(){
 		var id = 'mask',
-	    	cls = 'mask';
+	    	cls = 'mask',
+	    	css = {
+	    		'position' : 'fixed',
+	    		'top' : 0,
+	    		'left' : 0,
+	    		'width' : '100%',
+	    		'height' : '100%',
+	    		'background-color' : '#aaaaaa',
+	    		'opacity' : 0.4,
+	    		'filter' : 'alpha(opacity=40)',
+	    		'z-index' : 98
+	    	};
 	    
 	    /*
 		 * @method : show
 		 */
-	    this.show = function () {
+	    this.show = function (addStyle) {
 	        
 	        var msk = document.createElement('div');
+	        var style = '';
+	        
 	        msk.setAttribute('id', id);
 	        msk.setAttribute('class', cls);
+	        
+	        css['background-color'] = jrx.config('maskColor');
+	        
+	        if(addStyle){
+	        	css = $.extend(css, addStyle);
+	        }
+	        
+	        for(var v in css){
+	        	style += v + ':' + css[v] + ';';
+	        }
+	        msk.setAttribute('style', style);
 	        
 	        if (!document.getElementById(id)) document.body.appendChild(msk);
 	        
@@ -566,7 +679,7 @@
 */
 if (typeof String.prototype.trim != 'function') {
     String.prototype.trim = function () {
-        return this.replace(_REGEXP.trim, "");
+        return this.replace(jrx.regexp('trim'), "");
     };
 };
 
@@ -633,6 +746,72 @@ if (typeof Array.prototype.contains != 'function') {
     };
 };
 
+// Production steps of ECMA-262, Edition 5, 15.4.4.14
+// Reference: http://es5.github.io/#x15.4.4.14
+if (!Array.prototype.indexOf) {
+  Array.prototype.indexOf = function(searchElement, fromIndex) {
+
+    var k;
+
+    // 1. Let O be the result of calling ToObject passing
+    //    the this value as the argument.
+    if (this == null) {
+      throw new TypeError('"this" is null or not defined');
+    }
+
+    var O = Object(this);
+
+    // 2. Let lenValue be the result of calling the Get
+    //    internal method of O with the argument "length".
+    // 3. Let len be ToUint32(lenValue).
+    var len = O.length >>> 0;
+
+    // 4. If len is 0, return -1.
+    if (len === 0) {
+      return -1;
+    }
+
+    // 5. If argument fromIndex was passed let n be
+    //    ToInteger(fromIndex); else let n be 0.
+    var n = +fromIndex || 0;
+
+    if (Math.abs(n) === Infinity) {
+      n = 0;
+    }
+
+    // 6. If n >= len, return -1.
+    if (n >= len) {
+      return -1;
+    }
+
+    // 7. If n >= 0, then Let k be n.
+    // 8. Else, n<0, Let k be len - abs(n).
+    //    If k is less than 0, then let k be 0.
+    k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+    // 9. Repeat, while k < len
+    while (k < len) {
+      var kValue;
+      // a. Let Pk be ToString(k).
+      //   This is implicit for LHS operands of the in operator
+      // b. Let kPresent be the result of calling the
+      //    HasProperty internal method of O with argument Pk.
+      //   This step can be combined with c
+      // c. If kPresent is true, then
+      //    i.  Let elementK be the result of calling the Get
+      //        internal method of O with the argument ToString(k).
+      //   ii.  Let same be the result of applying the
+      //        Strict Equality Comparison Algorithm to
+      //        searchElement and elementK.
+      //  iii.  If same is true, return k.
+      if (k in O && O[k] === searchElement) {
+        return k;
+      }
+      k++;
+    }
+    return -1;
+  };
+}
 //============================================================
 
 ;(function( $, window, document){
@@ -661,6 +840,10 @@ if (typeof Array.prototype.contains != 'function') {
 	
 	jrx.define('isNumber', function(obj){
 		return $.type(obj) === 'number';
+	});
+	
+	jrx.define('isArray', function(obj){
+		return $.type(obj) === 'array';
 	});
 	
 	jrx.define('isBoolean', function(obj){
@@ -784,7 +967,7 @@ if (typeof Array.prototype.contains != 'function') {
 		if( utils[v] === undefined ){
 			utils[v] = jrx[v];
 		} else {
-			jrx.log('ooora!');
+			jrx.log('ooora! - ' + v);
 		}
 	});
 	//============================================================
@@ -798,26 +981,12 @@ if (typeof Array.prototype.contains != 'function') {
 		//========================= variable =========================
 		var dateFormat = 'yy-mm-dd',
 			timeFormat = 'HH:mm',
-			appconfig = {
-				"useLog" : true
-			},
 			content_type = {
 				defaults : 'application/x-www-form-urlencoded; charset=UTF-8',
 				json : 'application/json'
-			},
-			$logo = $('#header_logo'),
-			$gnb = $('#nav'),
-			$lnb = $('#lnb'),
-			$contents = $('#contents'),
-			$page = $contents.find('.sub-content');
+			};
 		//============================================================
-		
-		
-		//================== application configuration ===============
-		$.config(appconfig);
-		//============================================================
-		
-		
+				
 		//===================== set jquery ajax. ===================== contentType : content_type.defaults, 
 		$.ajaxSetup({ cache: false,
         	converters: {
@@ -843,7 +1012,7 @@ if (typeof Array.prototype.contains != 'function') {
                 dateFormat: dateFormat
             });
             
-			$('input[date]', $contents).datepicker();
+			// $('input[date]', $contents).datepicker();
 		}
 		//============================================================
 		

@@ -5,11 +5,12 @@
     <title>UI Script Guide ( jQuery-Based )</title>
     <link rel="stylesheet" type="text/css" href="./styles/default.css" media="all" />
     
-    <!-- syntaxhighlighter -->
+	<!-- syntaxhighlighter -->
     <link type="text/css" rel="stylesheet" href="./syntaxhighlighter/styles/shCoreDefault.css"/>
     <script type="text/javascript" src="./syntaxhighlighter/scripts/shCore.js"></script>
     <script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushXml.js"></script>
 	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="./syntaxhighlighter/scripts/shBrushBash.js"></script>
 	
     <!--[if lt IE 9]>
         <script src="./scripts/lib/html5.js"></script>
@@ -289,6 +290,10 @@
 		//======================== page initialize ===================
 		
 		SyntaxHighlighter.all();
+		
+		$('#footer').on('click', function () {
+			
+		});
 		
 		//============================================================
 	});

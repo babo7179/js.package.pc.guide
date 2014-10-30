@@ -5,12 +5,6 @@
     <title>UI Script Guide ( jQuery-Based )</title>
     <link rel="stylesheet" type="text/css" href="../styles/default.css" media="all" />
     
-    <!-- syntaxhighlighter -->
-    <link type="text/css" rel="stylesheet" href="../syntaxhighlighter/styles/shCoreDefault.css"/>
-    <script type="text/javascript" src="../syntaxhighlighter/scripts/shCore.js"></script>
-    <script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushXml.js"></script>
-	<script type="text/javascript" src="../syntaxhighlighter/scripts/shBrushJScript.js"></script>
-	
     <!--[if lt IE 9]>
         <script src="../scripts/lib/html5.js"></script>
     <![endif]-->
@@ -18,8 +12,8 @@
 	<script type="text/javascript" src="../scripts/lib/modernizr.full.min.js"></script>
     
     <script src="../scripts/jquery/jquery-1.10.2.min.js"></script>				<!-- jquery -->
-    <script src="../scripts/dist/jquery.plugin.pkg.min.js"></script>			<!-- jquery : plugin -->
-	<script src="../scripts/jrx/jrx.min.js"></script>						<!-- jrx -->
+    <script src="../scripts/jquery/jquery.plugin.pkg.min.js"></script>			<!-- jquery : plugin -->
+	<script src="../scripts/lib/jrx.min.js"></script>						<!-- jrx -->
 	<script>
 	(function(){
 		
@@ -50,7 +44,7 @@
 			</aside>
 			<div class="content-area">
 				<div class="sub-content">
-					<form name="frm" id="frm" action="" >
+					<form name="frm" id="frm" action=""  novalidate="novalidate">
 					<input type="hidden" name="uploadDir" value="sample"/>
 					<article>
 						<div class="table-menu">
@@ -75,9 +69,22 @@
 										<th>히든필드 카운트 처리</th>
 										<td colspan="3">
 											<p class="form-title">
-												<input type="text" value="0" name="count" id="count" required="required" count="1" data-title="히든필드 카운트" readonly="readonly" />
 												<button class="btn-type-1" name="btn_plus"> + </button>
 												<button class="btn-type-2" name="btn_minus"> - </button>
+											</p>
+										</td>
+									</tr>
+									<tr>
+										<th>제목 (+)</th>
+										<td colspan="3">
+											<p class="form-title">
+												<select name="aa"  required="required">
+													<option></option>
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+												</select>
+												<span>(유효성 검사)</span>
 											</p>
 										</td>
 									</tr>
@@ -95,7 +102,7 @@
 										<th>이메일</th>
 										<td colspan="3">
 											<p class="form-title">
-												<input type="text" id="search_man" name="search_man" class="input-block-level input-w100" required="required" email="email" data-title="이메일" />
+												<input type="text" id="search_man" name="search_man" class="input-block-level input-w100" email="email" data-title="이메일" />
 											</p>
 										</td>
 									</tr>
@@ -103,7 +110,7 @@
 										<th>날짜 선택</th>
 										<td colspan="3">
 											<p class="form-title">
-												<input type="text" id="date_example" date="date" required="required" data-title="날짜" class="input-block-level input-w200" />
+												<input type="text" id="date_example" date="date" data-title="날짜" class="input-block-level input-w200" />
 											</p>
 										</td>
 									</tr>
@@ -128,7 +135,7 @@
 										<th>비밀번호</th>
 										<td colspan="3">
 											<p class="form-title">
-												<input type="text" id="pwd" name="pwd" class="input-block-level" required="required" maxlength="100" data-title="비밀번호" />
+												<input type="text" id="pwd" name="pwd" class="input-block-level" maxlength="100" data-title="비밀번호" />
 												<span>(유효성 검사)</span>
 											</p>
 										</td>
@@ -137,7 +144,7 @@
 										<th>비밀번호 확인</th>
 										<td colspan="3">
 											<p class="form-title">
-												<input type="text" id="pwd_chk" name="pwd_chk" class="input-block-level" equalTo="#pwd" required="required" maxlength="100" data-title="비밀번호 확인" />
+												<input type="text" id="pwd_chk" name="pwd_chk" class="input-block-level" equalTo="#pwd" maxlength="100" data-title="비밀번호 확인" />
 												<span>(유효성 검사)</span>
 											</p>
 										</td>
@@ -186,10 +193,24 @@
 		
 		// $.validate.extend();
 		// $.validate.init();
-		$frm.validate();
+		// $frm.validate();
 		
 		function saveListener () {
-			$frm.submit();
+			
+			$frm.validate({
+		        submitHandler: function (form) {
+		            alert('123');
+		            
+		        }
+		    });
+		    
+		    var is = $frm.valid(function () {
+				alert('1111');
+			});
+			
+			$.log(is);
+			
+			//$frm.submit();
 			return false;
 		}
 		

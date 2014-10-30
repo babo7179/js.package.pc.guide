@@ -55,11 +55,7 @@
 		}
 		//============================================================
 		
-	});
-})( jQuery, window, document );
-
-(function( $, window, document){
-	$.ready(function(){
-		$.log('ready?');
+		console.log('123123aa');
+		
 	});
 })( jQuery, window, document );
