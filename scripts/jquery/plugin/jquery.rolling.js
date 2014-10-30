@@ -23,8 +23,8 @@
         
         return this.each(function (i, v) {
         	
+        	
         });
 	};
 	
-
 })( jQuery, window, document );
