@@ -1,4 +1,4 @@
-/*! scripts.package - v1.0.0 - 2014-10-30 */;
+/*! scripts.package - v1.0.0 - 2014-11-10 */;
 /**
  * @name : jquery.fn.navi
  */
@@ -2752,6 +2752,8 @@ $.extend($.validator, {
 		},
 
 		showLabel: function( element, message ) {
+			
+			console.log('123123');
 			var label = this.errorsFor( element );
 			if ( label.length ) {
 				// refresh error/success class
@@ -2760,10 +2762,10 @@ $.extend($.validator, {
 				label.html(message);
 			} else {
 				// create label
-				label = $("<" + this.settings.errorElement + ">")
-					.attr("for", this.idOrName(element))
-					.addClass(this.settings.errorClass)
-					.html(message || "");
+				// label = $("<" + this.settings.errorElement + ">")
+					// .attr("for", this.idOrName(element))
+					// .addClass(this.settings.errorClass)
+					// .html(message || "");
 				if ( this.settings.wrapper ) {
 					// make sure the element is visible, even in IE
 					// actually showing the wrapped element is handled elsewhere

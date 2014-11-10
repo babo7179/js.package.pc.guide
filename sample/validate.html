@@ -13,7 +13,7 @@
     
     <script src="../scripts/jquery/jquery-1.10.2.min.js"></script>				<!-- jquery -->
     <script src="../scripts/jquery/jquery.plugin.pkg.min.js"></script>			<!-- jquery : plugin -->
-	<script src="../scripts/lib/jrx.min.js"></script>						<!-- jrx -->
+	<script src="../scripts/lib/jrx.js"></script>						<!-- jrx -->
 	<script>
 	(function(){
 		
@@ -65,7 +65,7 @@
 									<col />
 								</colgroup>
 								<tbody>
-									<tr>
+									<!-- <tr>
 										<th>히든필드 카운트 처리</th>
 										<td colspan="3">
 											<p class="form-title">
@@ -73,12 +73,12 @@
 												<button class="btn-type-2" name="btn_minus"> - </button>
 											</p>
 										</td>
-									</tr>
+									</tr> -->
 									<tr>
 										<th>제목 (+)</th>
 										<td colspan="3">
 											<p class="form-title">
-												<select name="aa"  required="required">
+												<select name="aa" id="form.aa"  required="required">
 													<option></option>
 													<option value="1">1</option>
 													<option value="2">2</option>
@@ -179,66 +179,64 @@
 </div>
 
 <script>
-(function( $, window, document){
-	$(function(){
-		//======================== page initialize ===================
+$(function(){
+	//======================== page initialize ===================
+	
+	var $frm = $('#frm');
+	
+	$frm.find('button[name=btn_save]').on('click', saveListener);
+	$frm.find('button[name=btn_cancel]').on('click', cancelListener);
+	
+	$frm.find('button[name=btn_plus]').on('click', plusListener);
+	$frm.find('button[name=btn_minus]').on('click', minusListener);
+	
+	// $.validate.extend();
+	// $.validate.init();
+	// $frm.validate();
+	
+	function saveListener () {
 		
-		var $frm = $('#frm');
+		$.log('123');
+		// return false;
+		// $frm.validate({
+	        // submitHandler: function (form) {
+	            // alert('123');
+// 	            
+	        // }
+	    // });
+	    
+	    var is = $frm.valid();
 		
-		$frm.find('button[name=btn_save]').on('click', saveListener);
-		$frm.find('button[name=btn_cancel]').on('click', cancelListener);
+		$.log(is);
 		
-		$frm.find('button[name=btn_plus]').on('click', plusListener);
-		$frm.find('button[name=btn_minus]').on('click', minusListener);
+		//$frm.submit();
+		return false;
+	}
+	
+	function cancelListener () {
+		return false;
+	}
+	
+	function plusListener () {
+		$.log('plus click');
+		setCount(true);
+		return false;
+	}
+	
+	function minusListener () {
+		setCount(false);
+		return false;
+	}
+	
+	function setCount (isPlus) {
+		var count = parseInt($('#count').val(), 10);
 		
-		// $.validate.extend();
-		// $.validate.init();
-		// $frm.validate();
-		
-		function saveListener () {
-			
-			$frm.validate({
-		        submitHandler: function (form) {
-		            alert('123');
-		            
-		        }
-		    });
-		    
-		    var is = $frm.valid(function () {
-				alert('1111');
-			});
-			
-			$.log(is);
-			
-			//$frm.submit();
-			return false;
-		}
-		
-		function cancelListener () {
-			return false;
-		}
-		
-		function plusListener () {
-			$.log('plus click');
-			setCount(true);
-			return false;
-		}
-		
-		function minusListener () {
-			setCount(false);
-			return false;
-		}
-		
-		function setCount (isPlus) {
-			var count = parseInt($('#count').val(), 10);
-			
-			count = isPlus ? count + 1 : count && count - 1;
-			$.log('current count : ' + count);
-			$('#count').val(count);
-		}
-		//============================================================
-	});
-})( jQuery, window, document );
+		count = isPlus ? count + 1 : count && count - 1;
+		$.log('current count : ' + count);
+		$('#count').val(count);
+	}
+	//============================================================
+});
 </script>
 </body>
 </html>

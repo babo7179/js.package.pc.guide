@@ -1,4 +1,4 @@
-/*! jrx - v0.1.0 - 2014-10-30 */(function(document, window){
+/*! jrx - v0.1.0 - 2014-11-10 */(function(document, window){
 	'use strict';
 	
 	/**
@@ -27,7 +27,8 @@
 		        'loginUrl':  	{ 'editable': true, 	'value': ''},
 		        'logoutUrl':  	{ 'editable': true, 	'value': ''},
 		        'loading' : 	{ 'editable': true, 	'value': './images/loading_medium.gif'},
-		        'maskColor' : 	{ 'editable': true, 	'value': '#aaaaaa'}
+		        'maskColor' : 	{ 'editable': true, 	'value': '#aaaaaa'},
+		        'useAlert' : 	{ 'editable': true, 	'value': true}
 		    },
 		    
 		    /**
@@ -59,7 +60,7 @@
 	        } else if($.type(p) === 'string'){
 	        	return get(p);
 	        } else {
-	        	throw new Error('parameter is only json or string. current type : ' + $.type(v));
+	        	throw new Error('parameter is only json or string. current type : ' + $.type(p));
 	        }
 	        
 	        /**
@@ -91,10 +92,21 @@
 	    	 */
 	    	function get(n) {
 	        	
-	            if(_config[n] === undefined){
+	            if(_config[n] === undefined && n !== 'all'){
 	                throw new Error('undefined property name : ' + n);
 	            }
-	            return _config[n].value; 
+	            
+	            var returnVal;
+	            
+	            if(n == 'all'){
+	            	returnVal = {};
+	            	for(var item in _config){
+	            		returnVal[item] = _config[item].value;  
+	            	}
+	            } else {
+	            	returnVal = _config[n].value;
+	            }
+	            return returnVal; 
 	        }
 	    };
 	    
@@ -926,24 +938,31 @@ if (!Array.prototype.indexOf) {
                     $.each(errorList, function (i, v) {
                         var _$element = $(v.element);
                         if (i != 0) return;
-                        textLabels += $('<label />')
-						    .attr('for', _$element.attr('id'))
-						    .html('<strong>' + getMessage(_$element) + ' : </strong>' + (_$element.data('message') || v.message))
-						    .appendTo(labelWrap);
+                        // textLabels += $('<label />')
+						    // .attr('for', _$element.attr('id'))
+						    // .html('<strong>' + getMessage(_$element) + ' : </strong>' + (_$element.data('message') || v.message))
+						    // .appendTo(labelWrap);
                         if (i == 0) {
                             textAlert += getMessage(_$element) + (_$element.data('message') || v.message);
+                            _$element.focus();
                         }
                     });
 
                     function getMessage(_$element) {
                         return _$element.data('title')
-						    || $('[for=' + _$element.attr('id') + ']').text()
+						    // || $('[for=' + _$element.attr('id') + ']').text()
+						    || _$element.parent().find('>label').text()
 						    || _$element.parent('label').text()
 						    || _$element.attr('placeholder')
 						    || _$element.attr('name');
                     };
 
-                    $.stateAlarm(textAlert);
+					if(!jrx.config('useAlert') && $.isfunction($.stateAlarm)){
+						$.stateAlarm(textAlert);	
+					} else {
+						alert(textAlert);
+					}
+                    
                     return;
                 },
                 submitHandler: function (form) { form.submit(); }

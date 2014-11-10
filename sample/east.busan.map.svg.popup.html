@@ -14,18 +14,15 @@
 	<script>
 	(function(){
 		
-		$.config({contextPath:'/', useLog : true});
+		$.config({contextPath:'/'});
 		
 	})();
 	</script>
 	<!-- <script src="../scripts/init.js"></script> -->
     
     <style>
-    html,body {height:100%;}
-    a {color:inherit; text-decoration:none;}
-    #navi ul {padding-bottom : 20px;list-style-type : none;clear:both;}
-    #navi li {float:left;width:25%;font-size:0.8em;}
-	#map-canvas {width : 100%;border :1px solid #aaaaaa;margin: 0px;padding: 0px;}
+    html,body {height:100%;margin:0px;padding:0px;overflow:hidden;}
+	#map-canvas {width : 100%;height:100%;border :1px solid #aaaaaa;margin: 0px;padding: 0px;overflow:hidden;}
   	
   	#demo_map {background: url(/images/map.0.jpg);background-size: contain;background-repeat:no-repeat;}
   	
@@ -37,38 +34,16 @@
 </head>
 <body>
 
-<div id="document">
-
-	<div id="contents">
-		<div class="content-wrap">
-			<aside>
-				<nav id="navi">
-				    <ul>
-				        <li><a href="#all" id="all">전체</a></li>
-				        <li><a href="#nike" id="nike">나이키</a></li>
-				        <li><a href="#north" id="north">노스페이스</a></li>
-				        <li><a href="#wellmade" id="wellmade">웰메이드</a></li>
-				    </ul>
-				</nav>
-			</aside>
-			<div class="content-area">
-				<div class="sub-content">
-					<div id="map-canvas">
+<div id="map-canvas">
 						
-						<svg id="demo_map" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 1025.7 728.25">
-							<g transform="translate(142.83807,-36.808611)">
-								<!-- <rect height="41" width="154.33" y="635.39" x="258.16" fill="#b2b2b2"/> -->
-								<!-- <text x="118" y="155" text-anchor="middle" fill="#000000"><tspan>나이키</tspan></text>
-								<text x="580" y="155" text-anchor="middle" fill="#000000"><tspan>노스페이스</tspan></text>
-								<text x="220" y="350" text-anchor="middle" fill="#000000"><tspan>웰메이드</tspan></text> -->
-							</g>
-						</svg>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+	<svg id="demo_map" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 1025.7 728.25">
+		<g transform="translate(142.83807,-36.808611)">
+			<!-- <rect height="41" width="154.33" y="635.39" x="258.16" fill="#b2b2b2"/> -->
+			<!-- <text x="118" y="155" text-anchor="middle" fill="#000000"><tspan>나이키</tspan></text>
+			<text x="580" y="155" text-anchor="middle" fill="#000000"><tspan>노스페이스</tspan></text>
+			<text x="220" y="350" text-anchor="middle" fill="#000000"><tspan>웰메이드</tspan></text> -->
+		</g>
+	</svg>
 </div>
 
 <script>
@@ -83,15 +58,9 @@ $(function(){
 		minScale: 1,
 		increment: 0.4,
 		rangeStep: 0.2,
-		transition: false,
+		transition: true,
 		contain: 'invert',
-		disablePan: true,
-  		disableZoom: true
-	});
-	
-	$panzoom.panzoom('zoom', 1.8, {
-		increment: 0.2,
-		animate: false
+		scale : 1.6
 	});
 	
 	$panzoom.on('panzoomend', function(e, panzoom, matrix, changed) {
@@ -154,12 +123,6 @@ $(function(){
 			$panzoom.removeAttr('text')
 		}
 	}
-	
-	$('#demo_map').on('click', function (e) {
-		$.log('111a');
-		location.href = 'east.busan.map.svg.popup.html';
-		return false;
-	});
 	
     $('#all').on('click', function (e) {
 		
